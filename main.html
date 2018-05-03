@@ -9,8 +9,107 @@
     <tr><td>Number of days</td><td><input id="n_days" type="number"/></td></tr>
     <tr><td>Country code</td><td><input =id="contry_code"/></td></tr>
   </table>
-  <input type="submit" value="Render" />
+  <input type="submit" value="Render" onclick="renderCalendar();"/>
 
- 
+  <!--<p id="calendar"></p>-->
+
+  <p id="line_start"></p>
+
+
 </body>
+<script>
+    var a_last_day_month = [31,29,31,30,31,30,31,31,30,31,30,31];
 
+    function renderCalendar(){
+      var v_start_date = document.getElementById("start_date").value;
+      var v_n_days = document.getElementById("n_days").value;
+      var v_line_start = document.getElementById("line_start");
+      var v_items = "";
+      //var d = new Date(2018,4,30);
+      var d = new Date();
+      //var n_ite = v_n_days/30
+      //for(i=0;i<3;i++){
+      v_items += printAMonth(d,v_n_days);
+
+      /*var r_days = a_last_day_month[d.getMonth()] - d.getDate();
+      var i=d.getMonth()+1;
+      do{
+         v_items += "<p>";
+         if(v_n_days>r_days){
+            v_items += printAMonth(d,r_days + 1 );
+            v_n_days -= r_days + 1;
+         } else {
+            v_items += printAMonth(d,v_n_days);
+            v_n_days -= v_n_days;
+         }
+         var year = d.getFullYear();
+         if(i>11){
+           i = 0;
+           year = d.getFullYear()+1;
+         }
+         d = new Date(year,i,1);
+         var r_days = a_last_day_month[i];
+         i++;
+         v_items += "</p>";
+      }
+      while(v_n_days>0);*/
+
+      console.log("v_items:" + v_items);
+      v_line_start.innerHTML = v_items;
+    }
+
+
+    function printAMonth(startDate,nDays){
+      var d = startDate;
+      var first_d = new Date(d.getFullYear(), d.getMonth(), 1);
+      var start = 0;
+      var count = 1;
+      var s_table = "<table><tr><td>S</td><td>M</td><td>T</td><td>W</td><td>T</td><td>F</td><td>S</td></tr>";
+      var i=0;
+      var j=0;
+      var f_date = d.getDate();
+      console.log("start_date:" + startDate);
+      console.log("start_date:" + d);
+      console.log("first_month_date:" + first_d);
+      console.log("date:" + f_date);
+      for(i=0;i<6;i++){
+        s_table = s_table + "<tr>";
+        for(j=0;j<7;j++){
+          var day = first_d.getDay();
+          if( i== 0 && j == day){
+          //if( i== 0 && j == d.getDate()){
+            start = 1;
+          }
+          if(start == 1){
+            s_table += "<td>" ;
+
+            /*if(count >= f_date + nDays){
+              s_table += count;
+            } */
+
+            /*if(count >= f_date){
+              s_table += count;
+            } else {
+              s_table += '-';
+            }*/
+
+            s_table += "</td>";
+            //s_table = s_table + "<td>" + count + "</td>";
+            count++;
+          } else {
+            s_table = s_table + "<td>-</td>";
+          }
+          if((count == a_last_day_month[d.getMonth()] + 1) || (count-1 == nDays)){
+          //if(count-1 == v_n_days){
+            start = 0;
+          }
+        }
+        s_table = s_table + "</tr>"
+      }
+      s_table = s_table + "</table>"
+      //v_p.innerHTML = s_table;
+      return s_table;
+    }
+
+</script>
+</html>
