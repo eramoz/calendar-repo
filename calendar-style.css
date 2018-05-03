@@ -1,0 +1,26 @@
+.table_class td{
+	width: 16px;
+	height: 20px;
+}
+.header_class {
+	background-color: #d8fecc;
+	text-align: center;
+}
+
+.header2_class td {
+	background-color: white;
+}
+
+.cell_invalid_class{
+	background-color: #d1d1d1;		
+}
+
+.cell_valid_class{
+	background-color: green;
+}
+.cell_valid2_class{
+	background-color: yellow;
+}	
+.cell_valid3_class{
+	background-color: orange;
+}
